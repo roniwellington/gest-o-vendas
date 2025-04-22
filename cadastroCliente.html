@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Clientes - Sistema Batatas Chips</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #2c3e50;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      transition: width 0.3s;
+    }
+
+    .sidebar.collapsed {
+      width: 80px;
+    }
+
+    .toggle-sidebar {
+      color: #fff;
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-size: 20px;
+      align-self: flex-end;
+    }
+
+    .logo {
+      font-size: 24px;
+      margin-bottom: 30px;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-item {
+      margin: 10px 0;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .menu-item:hover {
+      background-color: #34495e;
+    }
+
+    .sidebar.collapsed .menu-item span {
+      display: none;
+    }
+
+    .main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ecf0f1;
+      padding: 15px 30px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .user-area i,
+    .user-area img {
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .user-area img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+
+    .content {
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      margin: auto;
+    }
+
+    form h2 {
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #34495e;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <div class="toggle-sidebar" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="logo">Batatas Chips</div>
+    <div class="menu-item"><i class="fas fa-chart-line"></i><span><a href="index.html">Dashboard</a></span></div>
+    <div class="menu-item"><i class="fas fa-user"></i><span>Cadastros</span></div>
+    <div class="menu-item"><i class="fas fa-box"></i><span>Estoques</span></div>
+    <div class="menu-item"><i class="fas fa-shopping-cart"></i><span>Vendas</span></div>
+    <div class="menu-item"><i class="fas fa-file-invoice"></i><span>Fiscal</span></div>
+    <div class="menu-item"><i class="fas fa-dollar-sign"></i><span>Financeiro</span></div>
+    <div class="menu-item"><i class="fas fa-store"></i><span>E-Commerce</span></div>
+    <div class="menu-item"><i class="fas fa-search"></i><span>Consultas</span></div>
+  </div>
+
+  <div class="main">
+    <header>
+      <div class="page-title">Cadastro de Clientes</div>
+      <div class="user-area">
+        <i class="fas fa-cog"></i>
+        <i class="fas fa-bell"></i>
+        <img src="https://via.placeholder.com/35" alt="Usuário" />
+      </div>
+    </header>
+
+    <div class="content">
+      <form>
+        <h2>Dados da Empresa</h2>
+
+        <div class="form-group">
+          <label for="nome">Nome da Empresa</label>
+          <input type="text" id="nome" name="nome" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cnpj">CNPJ</label>
+          <input type="text" id="cnpj" name="cnpj" required>
+        </div>
+
+        <div class="form-group">
+          <label for="responsavel">Nome do Responsável</label>
+          <input type="text" id="responsavel" name="responsavel">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email">
+        </div>
+
+        <div class="form-group">
+          <label for="contato">Contato</label>
+          <input type="text" id="contato" name="contato">
+        </div>
+
+        <div class="form-group">
+          <label for="cep">CEP</label>
+          <input type="text" id="cep" name="cep">
+        </div>
+
+        <div class="form-group">
+          <label for="bairro">Bairro</label>
+          <input type="text" id="bairro" name="bairro">
+        </div>
+
+        <div class="form-group">
+          <label for="cidade">Cidade</label>
+          <input type="text" id="cidade" name="cidade">
+        </div>
+
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <input type="text" id="estado" name="estado">
+        </div>
+
+        <div class="form-group">
+          <label for="endereco">Endereço</label>
+          <input type="text" id="endereco" name="endereco" required>
+        </div>
+
+        <div class="form-group">
+          <label for="categoria">Categoria</label>
+          <select id="categoria" name="categoria" onchange="toggleNovaCategoria(this.value)">
+            <option value="">Selecione uma categoria</option>
+            <option value="Supermercado">Supermercado</option>
+            <option value="Conveniência">Conveniência</option>
+            <option value="Bar">Bar</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="novaCategoriaGroup" style="display: none;">
+          <label for="novaCategoria">Nova Categoria</label>
+          <input type="text" id="novaCategoria" name="novaCategoria">
+        </div>
+
+        <button type="submit">Cadastrar Cliente</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('collapsed');
+    }
+
+    function toggleNovaCategoria(valor) {
+      const grupo = document.getElementById('novaCategoriaGroup');
+      if (valor === 'Outro') {
+        grupo.style.display = 'block';
+      } else {
+        grupo.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
