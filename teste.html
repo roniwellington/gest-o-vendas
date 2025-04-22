@@ -26,28 +26,12 @@
       display: flex;
       flex-direction: column;
       padding: 20px;
-      transition: width 0.3s;
-    }
-
-    .sidebar.collapsed {
-      width: 80px;
-    }
-
-    .toggle-sidebar {
-      color: #fff;
-      cursor: pointer;
-      margin-bottom: 20px;
-      font-size: 20px;
-      align-self: flex-end;
     }
 
     .logo {
       font-size: 24px;
       margin-bottom: 30px;
       font-weight: bold;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .menu-item {
@@ -56,18 +40,10 @@
       padding: 10px;
       border-radius: 5px;
       transition: background 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
     }
 
     .menu-item:hover {
       background-color: #34495e;
-    }
-
-    .sidebar.collapsed .menu-item span {
-      display: none;
     }
 
     .main {
@@ -140,7 +116,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 250px;
+      height: 300px;
     }
 
     canvas {
@@ -150,19 +126,16 @@
   </style>
 </head>
 <body>
-  <div class="sidebar" id="sidebar">
-    <div class="toggle-sidebar" onclick="toggleSidebar()">
-      <i class="fas fa-bars"></i>
-    </div>
+  <div class="sidebar">
     <div class="logo">Batatas Chips</div>
-    <div class="menu-item"><i class="fas fa-chart-line"></i><span>Dashboard</span></div>
-    <div class="menu-item"><i class="fas fa-user"></i><span><a href="teste.html">Cadastros</a></span></div>
-    <div class="menu-item"><i class="fas fa-box"></i><span>Estoques</span></div>
-    <div class="menu-item"><i class="fas fa-shopping-cart"></i><span>Vendas</span></div>
-    <div class="menu-item"><i class="fas fa-file-invoice"></i><span>Fiscal</span></div>
-    <div class="menu-item"><i class="fas fa-dollar-sign"></i><span>Financeiro</span></div>
-    <div class="menu-item"><i class="fas fa-store"></i><span>E-Commerce</span></div>
-    <div class="menu-item"><i class="fas fa-search"></i><span>Consultas</span></div>
+    <div class="menu-item"><a href="index.html">Dashboard</a></div>
+    <div class="menu-item">Cadastros</div>
+    <div class="menu-item">Estoques</div>
+    <div class="menu-item">Vendas</div>
+    <div class="menu-item">Fiscal</div>
+    <div class="menu-item">Financeiro</div>
+    <div class="menu-item">E-Commerce</div>
+    <div class="menu-item">Consultas</div>
   </div>
 
   <div class="main">
@@ -218,12 +191,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('collapsed');
-    }
-
-    const lineChart = new Chart(document.getElementById('lineChart'), {
+    const ctxLine = document.getElementById('lineChart');
+    new Chart(ctxLine, {
       type: 'line',
       data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr'],
@@ -236,7 +205,8 @@
       }
     });
 
-    const pieChart = new Chart(document.getElementById('pieChart'), {
+    const ctxPie = document.getElementById('pieChart');
+    new Chart(ctxPie, {
       type: 'pie',
       data: {
         labels: ['Batata Tradicional', 'Batata Lisa', 'Batata Palha'],
@@ -247,7 +217,8 @@
       }
     });
 
-    const barChart1 = new Chart(document.getElementById('barChart1'), {
+    const ctxBar1 = document.getElementById('barChart1');
+    new Chart(ctxBar1, {
       type: 'bar',
       data: {
         labels: ['Loja 1', 'Loja 2', 'Loja 3'],
@@ -262,7 +233,8 @@
       }
     });
 
-    const barChart2 = new Chart(document.getElementById('barChart2'), {
+    const ctxBar2 = document.getElementById('barChart2');
+    new Chart(ctxBar2, {
       type: 'bar',
       data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr'],
