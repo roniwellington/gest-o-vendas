@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema Batatas Chips</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #2c3e50;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    .menu-item {
+      margin: 10px 0;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .menu-item:hover {
+      background-color: #34495e;
+    }
+
+    .main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ecf0f1;
+      padding: 15px 30px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .user-area i,
+    .user-area img {
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .user-area img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+
+    .content {
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .charts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .chart-container {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
+    }
+
+    canvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">Batatas Chips</div>
+    <div class="menu-item">Dashboard</div>
+    <div class="menu-item">Cadastros</div>
+    <div class="menu-item">Estoques</div>
+    <div class="menu-item">Vendas</div>
+    <div class="menu-item">Fiscal</div>
+    <div class="menu-item">Financeiro</div>
+    <div class="menu-item">E-Commerce</div>
+    <div class="menu-item">Consultas</div>
+  </div>
+
+  <div class="main">
+    <header>
+      <div class="page-title">Dashboard</div>
+      <div class="user-area">
+        <i class="fas fa-cog"></i>
+        <i class="fas fa-bell"></i>
+        <img src="https://via.placeholder.com/35" alt="Usuário" />
+      </div>
+    </header>
+    <div class="content">
+      <div class="cards">
+        <div class="card">
+          <h3>Faturamento</h3>
+          <p>R$ 10.000,00</p>
+          <small>Atualizado em: 20/04/2025</small>
+        </div>
+        <div class="card">
+          <h3>Pedidos</h3>
+          <p>150</p>
+          <small>Atualizado em: 20/04/2025</small>
+        </div>
+        <div class="card">
+          <h3>Clientes</h3>
+          <p>300</p>
+          <small>Atualizado em: 20/04/2025</small>
+        </div>
+        <div class="card">
+          <h3>Rejeições</h3>
+          <p>5%</p>
+          <small>Atualizado em: 20/04/2025</small>
+        </div>
+      </div>
+      <div class="charts">
+        <div class="chart-container">
+          <canvas id="lineChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <canvas id="pieChart"></canvas>
+        </div>
+      </div>
+      <div class="charts">
+        <div class="chart-container">
+          <canvas id="barChart1"></canvas>
+        </div>
+        <div class="chart-container">
+          <canvas id="barChart2"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctxLine = document.getElementById('lineChart');
+    new Chart(ctxLine, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+        datasets: [{
+          label: 'Vendas',
+          data: [1000, 1200, 1400, 1600],
+          borderColor: 'blue',
+          fill: false
+        }]
+      }
+    });
+
+    const ctxPie = document.getElementById('pieChart');
+    new Chart(ctxPie, {
+      type: 'pie',
+      data: {
+        labels: ['Batata Tradicional', 'Batata Lisa', 'Batata Palha'],
+        datasets: [{
+          data: [300, 500, 200],
+          backgroundColor: ['red', 'yellow', 'green']
+        }]
+      }
+    });
+
+    const ctxBar1 = document.getElementById('barChart1');
+    new Chart(ctxBar1, {
+      type: 'bar',
+      data: {
+        labels: ['Loja 1', 'Loja 2', 'Loja 3'],
+        datasets: [{
+          label: 'Vendas por loja',
+          data: [200, 300, 250],
+          backgroundColor: 'orange'
+        }]
+      },
+      options: {
+        indexAxis: 'y'
+      }
+    });
+
+    const ctxBar2 = document.getElementById('barChart2');
+    new Chart(ctxBar2, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+        datasets: [{
+          label: 'Produção',
+          data: [500, 600, 700, 800],
+          backgroundColor: 'teal'
+        }]
+      }
+    });
+  </script>
+</body>
+</html>
